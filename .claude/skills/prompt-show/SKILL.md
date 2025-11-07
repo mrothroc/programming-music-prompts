@@ -27,8 +27,8 @@ This skill displays comprehensive information about a specific music prompt.
 ## Usage examples
 
 ```bash
-cd scripts
-source ../venv/bin/activate
+cd .claude/skills/prompt-show/scripts
+source ../../venv/bin/activate
 
 # Basic info
 python show_prompt.py 40
@@ -76,9 +76,9 @@ Includes all the above plus:
 
 ## Files used
 
-- `scripts/show_prompt.py` - Display script
-- `scripts/csv_utils.py` - CSV reading and formatting utilities
-- `programming_music_prompts.csv` - Data source
+- `scripts/show_prompt.py` - Display script (embedded in this skill)
+- `scripts/csv_utils.py` - CSV reading and formatting utilities (embedded in this skill)
+- `../../../../programming_music_prompts.csv` - Data source (project root)
 
 ## Related skills
 

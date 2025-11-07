@@ -27,8 +27,8 @@ This skill adds or updates ratings for music prompts after the user has listened
 ## Usage examples
 
 ```bash
-cd scripts
-source ../venv/bin/activate
+cd .claude/skills/prompt-rate/scripts
+source ../../venv/bin/activate
 
 # Simple excellent rating
 python add_rating.py 40 "Excellent ⭐"
@@ -70,10 +70,10 @@ The user has noted:
 
 ## Files used
 
-- `scripts/add_rating.py` - Rating script
-- `scripts/csv_utils.py` - CSV update utilities
-- `programming_music_prompts.csv` - Data source
-- `docs/user-preferences.md` - Rating patterns and discoveries
+- `scripts/add_rating.py` - Rating script (embedded in this skill)
+- `scripts/csv_utils.py` - CSV update utilities (embedded in this skill)
+- `../../../../programming_music_prompts.csv` - Data source (project root)
+- `../../../../docs/user-preferences.md` - Rating patterns and discoveries
 
 ## After rating
 

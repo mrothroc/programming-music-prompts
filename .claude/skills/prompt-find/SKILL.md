@@ -29,8 +29,8 @@ This skill searches and filters the music prompt library using various criteria.
 ## Usage examples
 
 ```bash
-cd scripts
-source ../venv/bin/activate
+cd .claude/skills/prompt-find/scripts
+source ../../venv/bin/activate
 
 # By time block
 python find_prompts.py --time-block "Midday Refresh"
@@ -77,6 +77,6 @@ The text search is case-insensitive and searches across:
 
 ## Files used
 
-- `scripts/find_prompts.py` - Search script
-- `scripts/csv_utils.py` - CSV utilities with find/search functions
-- `programming_music_prompts.csv` - Data source
+- `scripts/find_prompts.py` - Search script (embedded in this skill)
+- `scripts/csv_utils.py` - CSV utilities with find/search functions (embedded in this skill)
+- `../../../../programming_music_prompts.csv` - Data source (project root)

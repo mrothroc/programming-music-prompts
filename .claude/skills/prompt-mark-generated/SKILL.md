@@ -27,8 +27,8 @@ This skill marks prompts as generated in the CSV after the user has created them
 ## Usage examples
 
 ```bash
-cd scripts
-source ../venv/bin/activate
+cd .claude/skills/prompt-mark-generated/scripts
+source ../../venv/bin/activate
 
 # Single prompt
 python mark_generated.py 40
@@ -83,9 +83,9 @@ All 70 prompts are currently marked as Generated=Yes. This skill will be useful 
 
 ## Files used
 
-- `scripts/mark_generated.py` - Marking script
-- `scripts/csv_utils.py` - CSV update utilities
-- `programming_music_prompts.csv` - Data source
+- `scripts/mark_generated.py` - Marking script (embedded in this skill)
+- `scripts/csv_utils.py` - CSV update utilities (embedded in this skill)
+- `../../../../programming_music_prompts.csv` - Data source (project root)
 
 ## Related skills
 

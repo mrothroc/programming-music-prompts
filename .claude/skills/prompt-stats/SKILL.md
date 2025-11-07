@@ -26,8 +26,8 @@ This skill displays comprehensive statistics about the neuroscience-informed mus
 ## How to use
 
 ```bash
-cd scripts
-source ../venv/bin/activate
+cd .claude/skills/prompt-stats/scripts
+source ../../venv/bin/activate
 python stats.py
 ```
 
@@ -49,6 +49,6 @@ python stats.py
 
 ## Files used
 
-- `scripts/stats.py` - Statistics script
-- `scripts/csv_utils.py` - CSV reading utilities
-- `programming_music_prompts.csv` - Canonical data source
+- `scripts/stats.py` - Statistics script (embedded in this skill)
+- `scripts/csv_utils.py` - CSV reading utilities (embedded in this skill)
+- `../../../../programming_music_prompts.csv` - Canonical data source (project root)
