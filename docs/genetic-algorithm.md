@@ -223,3 +223,30 @@ Each prompt in the CSV has a "Notes" column documenting its genetic heritage:
 - 20% random prevents premature convergence
 
 **Result**: Library has coherent aesthetic (focus music) while remaining sonically diverse (prevents listener habituation).
+
+---
+
+## The Importance of Parent Variety
+
+**User Insight** (Morning Warmup expansion, 2025-11-08):
+
+When generating 20 new Morning Warmup prompts, we used **two very different parent formulas**:
+- **Parent #4**: Acoustic jazz/Appalachian folk (fingerpicked guitar, upright bass, banjo, brush drums)
+- **Parent #27**: Ambient house/afro percussion (soft four-on-floor, kalimba, synth pads, congas)
+
+**Key Discovery**: Even with the same mutation strategy, the different parent formulas created valuable variety:
+- **Prompt #83** (Parent #4 + dulcimer): Organic acoustic morning warmth, Appalachian folk texture
+- **Prompt #84** (Parent #27 + steel pan): Electronic Caribbean groove, ambient house flow
+
+**Why this matters**:
+1. **Contextual variety**: Some days you want acoustic folk (83), other days electronic house (84)
+2. **Prevents sonic fatigue**: All 20 prompts don't sound like variations on the same template
+3. **Stylistic diversity**: Mutations applied to different parents create distinct sonic palettes
+4. **User choice**: More variety = better matches for different moods/focus needs
+
+**Lesson**: Don't just mutate instruments - also **vary the parent formulas**. The genetic algorithm works best when you have:
+- Multiple proven parents (not just one)
+- Parents from different sonic territories (acoustic vs electronic, jazz vs house)
+- Mutations applied to each parent type
+
+This creates **dimensional diversity**: variety across both parent types AND mutation types, not just one axis of variation.
