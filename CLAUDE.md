@@ -1,15 +1,15 @@
 # Suno Music Generation Project
 
-**Last Updated**: 2025-11-07
-**Status**: ✅ All 70 prompts generated and catalogued
+**Last Updated**: 2025-11-08
+**Status**: ✅ 90 prompts generated (70 original + 20 Morning Warmup expansion)
 
 ---
 
 ## Quick Summary
 
-This project generates a **neuroscience-informed library of 70 instrumental music prompts** for programming work using Suno AI. Music is designed to induce specific brainwave states (Theta-Gamma coupling, Alpha boost, etc.) throughout a programmer's workday.
+This project generates a **neuroscience-informed library of 90 instrumental music prompts** for programming work using Suno AI. Music is designed to induce specific brainwave states (Theta-Gamma coupling, Alpha boost, etc.) throughout a programmer's workday.
 
-**Key Innovation**: Using a genetic algorithm approach - 50% proven parent DNA + 30% hybrids + 20% mutations to avoid convergence while maintaining quality.
+**Key Innovation**: Using a genetic algorithm approach - 50% proven parent DNA + 30% hybrids + 20% mutations to avoid convergence while maintaining quality. Mutations are tracked in a separate influences library with status tracking (Unexplored → Tested → Proven/Avoid).
 
 ---
 
@@ -17,9 +17,10 @@ This project generates a **neuroscience-informed library of 70 instrumental musi
 
 ### Primary Files
 
-- **`programming_music_prompts.csv`** - CANONICAL SOURCE (70 prompts, all generated)
-- **`venv/`** - Python virtual environment for CSV processing
-- **`scripts/`** - Python utilities for safe CSV operations
+- **`programming_music_prompts.csv`** - CANONICAL SOURCE (90 prompts, all generated)
+- **`influences_library.csv`** - Musical influences database (46 influences, 5 categories)
+- **`.claude/skills/venv/`** - Python virtual environment (shared by all skills)
+- **`scripts/`** - Legacy Python utilities (superseded by skills)
 - **`backup/`** - Historical CSVs (not actively used)
 
 ### Documentation
@@ -31,10 +32,16 @@ This project generates a **neuroscience-informed library of 70 instrumental musi
 - **`docs/suno-generation.md`** - How to generate prompts in Suno (links to existing workflow docs)
 - **`docs/user-preferences.md`** - Ratings and feedback on generated music
 
-### Scripts & Skills
+### Claude Code Skills
 
-- **`scripts/README.md`** - Python utility scripts for CSV management
-- **`.claude/SKILLS_README.md`** - Claude Code skills documentation
+- **`.claude/SKILLS_README.md`** - Overview of all skills
+- **`prompt-stats`** - View library statistics
+- **`prompt-find`** - Search and filter prompts
+- **`prompt-show`** - Display prompt details
+- **`prompt-rate`** - Add ratings after listening
+- **`prompt-mark-generated`** - Track generation progress
+- **`prompt-generate`** - Generate new prompts using genetic algorithm
+- **`influence-manage`** - Manage the influences library (mutations)
 
 ### Legacy Workflow Docs (Keep as-is)
 
@@ -48,38 +55,57 @@ This project generates a **neuroscience-informed library of 70 instrumental musi
 
 **Note**: Claude Code skills automate these tasks - just ask naturally!
 
-### View library statistics
-- **Ask Claude**: "Show me the library stats"
-- **Manual**: `cd scripts && source ../venv/bin/activate && python stats.py`
+### Working with Prompts
 
-### Find prompts
-- **Ask Claude**: "Find prompts with saxophone" or "Show unrated prompts"
-- **Manual**: `cd scripts && python find_prompts.py --search "saxophone"`
+- "Show me the library stats" → `prompt-stats`
+- "Find prompts with saxophone" → `prompt-find`
+- "Show unrated prompts" → `prompt-find`
+- "Show me prompt 40" → `prompt-show`
+- "Prompt 40 is excellent" → `prompt-rate`
+- "I generated prompts 40-45" → `prompt-mark-generated`
 
-### View prompt details
-- **Ask Claude**: "Show me prompt 40"
-- **Manual**: `cd scripts && python show_prompt.py 40`
+### Generating New Prompts
 
-### Add ratings
-- **Ask Claude**: "Prompt 40 is excellent"
-- **Manual**: `cd scripts && python add_rating.py 40 "Excellent ⭐"`
+- "Generate 20 new Morning Warmup prompts" → `prompt-generate`
+- "Show parent candidates for Midday Refresh" → `prompt-generate --show-parents`
+- "Suggest mutation ideas" → `prompt-generate --suggest-mutations`
 
-### Mark as generated
-- **Ask Claude**: "I generated prompts 40-45"
-- **Manual**: `cd scripts && python mark_generated.py 40 41 42 43 44 45`
+### Managing Influences
 
-See `scripts/README.md` for detailed script usage and `.claude/SKILLS_README.md` for skills documentation.
+- "Search for influences with reverb" → `influence-manage`
+- "Show me influence 37" → `influence-manage`
+- "Mark surf rock as used in prompt 91" → `influence-manage`
+- "Mark celesta as avoid" → `influence-manage`
+
+See `.claude/SKILLS_README.md` for complete skills documentation.
 
 ---
 
 ## Key Insights
 
-1. **Saxophone as texture** (not melody) works excellently for midday refresh (Prompt 41 ⭐)
-2. **Quality variance is normal** - Suno generates 2 versions per prompt, keep the best
-3. **Both Styles AND Title fields must be filled** - Common mistake causes "Untitled" songs
-4. **Genetic diversity prevents incest** - Don't clone the same 2 prompts 38 times
+### What Works ✓
+1. **Saxophone as texture** (not melody) - Excellent for midday refresh (Prompt 41 ⭐)
+2. **Autoharp** - Pretty good for Morning Warmup (Prompt 87, tested)
+3. **Genetic diversity** - Using the 50/30/20 split prevents convergence
+
+### What Doesn't Work ✗
+1. **Celesta** - Too childlike, music box associations too playful (Prompt 89, marked "Avoid")
+2. **Suno generates 2 versions** - Quality variance is normal, keep the best version
+3. **Both Styles AND Title fields must be filled** - Missing either causes "Untitled" songs
+
+### Workflow Patterns
+1. **Rate based on best version** - If one version is excellent, rate the prompt excellent
+2. **Track influences** - Mark influences as Used/Tested/Proven/Avoid after generating
+3. **Use the influences library** - Don't repeat failed mutations (celesta), focus on proven ones
 
 ---
+
+## Project Stats (Current)
+
+- **Total prompts**: 90 (100% generated)
+- **Time blocks**: 10 (Morning Warmup expanded to 27 prompts)
+- **Influences**: 46 (1 Avoid, 1 Tested, 44 Unexplored)
+- **Ratings**: 10 prompts rated (3 excellent ⭐)
 
 ## For More Details
 
@@ -89,6 +115,7 @@ See `scripts/README.md` for detailed script usage and `.claude/SKILLS_README.md`
 - **CSV structure**: See `docs/csv-schema.md`
 - **How to generate**: See `docs/suno-generation.md`
 - **User ratings**: See `docs/user-preferences.md`
+- **Skills documentation**: See `.claude/SKILLS_README.md`
 
 ---
 
