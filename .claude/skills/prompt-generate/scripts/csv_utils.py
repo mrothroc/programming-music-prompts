@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 
 CSV_PATH = Path(__file__).parent.parent.parent.parent.parent / "programming_music_prompts.csv"
+INFLUENCES_PATH = Path(__file__).parent.parent.parent.parent.parent / "influences_library.csv"
 
 
 def read_prompts() -> List[Dict[str, str]]:
@@ -165,6 +166,55 @@ def print_prompt(prompt: Dict[str, str], verbose: bool = False):
 
     if prompt.get('Rating') and prompt['Rating'].strip():
         print(f"Rating: {prompt['Rating']}")
+
+
+def read_influences() -> List[Dict[str, str]]:
+    """Read all influences from influences_library.csv."""
+    with open(INFLUENCES_PATH, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        return list(reader)
+
+
+def get_influences_by_category(category: str) -> List[Dict[str, str]]:
+    """Get all influences in a specific category."""
+    influences = read_influences()
+    return [inf for inf in influences if inf['Category'] == category]
+
+
+def get_influences_by_status(status: str) -> List[Dict[str, str]]:
+    """Get all influences with a specific status (Unexplored, Tested, Proven, Avoid)."""
+    influences = read_influences()
+    return [inf for inf in influences if inf['Status'] == status]
+
+
+def search_influences(text: str) -> List[Dict[str, str]]:
+    """Search influences by text in Name, Elements_To_Use, or Adaptation_Notes."""
+    influences = read_influences()
+    results = []
+    text_lower = text.lower()
+
+    for inf in influences:
+        if (text_lower in inf['Name'].lower() or
+            text_lower in inf['Elements_To_Use'].lower() or
+            text_lower in inf['Adaptation_Notes'].lower()):
+            results.append(inf)
+
+    return results
+
+
+def get_random_unexplored_influences(count: int = 5, category: str = None) -> List[Dict[str, str]]:
+    """Get random unexplored influences, optionally filtered by category."""
+    import random
+
+    influences = get_influences_by_status('Unexplored')
+
+    if category:
+        influences = [inf for inf in influences if inf['Category'] == category]
+
+    if len(influences) <= count:
+        return influences
+
+    return random.sample(influences, count)
 
 
 if __name__ == "__main__":

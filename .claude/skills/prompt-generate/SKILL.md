@@ -53,7 +53,7 @@ Introduce new instruments or effects:
 cd .claude/skills/prompt-generate/scripts
 source ../../venv/bin/activate
 
-# Interactive mode (recommended)
+# Interactive mode (recommended) - includes mutation suggestions
 python generate_prompts.py --interactive
 
 # List available time blocks
@@ -61,6 +61,19 @@ python generate_prompts.py --list-blocks
 
 # Show parent candidates for a time block
 python generate_prompts.py --show-parents "Morning Warmup"
+
+# Browse mutation influences
+python generate_prompts.py --list-mutations                      # All influences by category
+python generate_prompts.py --list-mutations "Acoustic Instruments"  # Filter by category
+
+# Get random unexplored mutation suggestions
+python generate_prompts.py --suggest-mutations     # 10 random suggestions
+python generate_prompts.py --suggest-mutations 5   # 5 random suggestions
+
+# Search mutations by keyword
+python generate_prompts.py --search-mutations "gentle"    # For theta states
+python generate_prompts.py --search-mutations "alert"     # For focus
+python generate_prompts.py --search-mutations "harmonic"  # For deep work
 
 # Non-interactive (future)
 python generate_prompts.py --time-block "Midday Refresh" --count 20
@@ -105,29 +118,55 @@ python generate_prompts.py --time-block "Midday Refresh" --count 20
 - Create prompts that don't fit the time block purpose
 - Forget to capture what worked (rate the generated ones!)
 
-## Mutation Ideas Library
+## Mutation Ideas: Influences Library
 
-**Acoustic Instruments:**
-- Dulcimer, harp, autoharp, celesta
-- Steel pan, marimba, vibraphone, glockenspiel
-- Mandolin, bouzouki, oud, sitar
-- Lap steel guitar, EBow guitar
+**The mutation ideas are now managed in a dedicated database**: `influences_library.csv`
 
-**Electronic Effects:**
-- Dub delay, tape echo, reverb plates
-- Analog synth arpeggios, Mellotron
-- Granular synthesis, ambient drones
-- Vinyl crackle, tape saturation
+This library contains 46 curated musical influences organized into 5 categories:
+- **Acoustic Instruments** (14) - Dulcimer, harp, sitar, EBow guitar, etc.
+- **Electronic Effects** (9) - Dub delay, Mellotron, granular synthesis, etc.
+- **Rhythmic Elements** (6) - Swing, polyrhythms, odd time signatures, etc.
+- **Textures** (7) - Field recordings, harmonic drones, melodic percussion, etc.
+- **Genre Influences** (10) - Krautrock, space music, Balearic beat, etc.
 
-**Rhythmic Elements:**
-- Swing quantization, shuffle grooves
-- Polyrhythmic layers, odd time signatures
-- Clave patterns, gamelan rhythms
+Each influence includes:
+- **Elements_To_Use**: What to incorporate for optimal brain stimulation
+- **Elements_To_Avoid**: What destroys the focus-enhancement effect
+- **Adaptation_Notes**: How to apply the influence to programming music
+- **Status**: Unexplored → Tested → Proven/Avoid (tracks what works)
 
-**Textures:**
-- Field recordings (rain, forest, ocean)
-- Harmonic drones, sustained tones
-- Melodic percussion, tuned drums
+### Using the Influences Library
+
+Use the **`influence-manage` skill** to browse and search mutations:
+
+```bash
+# Find mutation ideas by category
+influence-manage --list --category "Acoustic Instruments"
+influence-manage --list --category "Electronic Effects"
+
+# Find unexplored mutations (fresh DNA)
+influence-manage --list --status "Unexplored"
+
+# Search for specific sonic qualities
+influence-manage --search "gentle"     # For theta-inducing morning warmup
+influence-manage --search "alert"      # For midday refresh
+influence-manage --search "harmonic"   # For deep focus
+
+# Find proven mutations that worked before
+influence-manage --list --status "Proven"
+
+# Show detailed guidance for a specific influence
+influence-manage --show 12  # e.g., Sitar details
+```
+
+### Workflow: Generating Mutations
+
+1. **Before generating prompts**: Browse influences library for mutation candidates
+2. **Select appropriate influences**: Match the time block's purpose (e.g., theta-inducing, focus-enhancing)
+3. **Apply following adaptation notes**: Use "Elements_To_Use", avoid "Elements_To_Avoid"
+4. **After testing in Suno**: Mark influence as used and update status based on user ratings
+
+See the `influence-manage` skill documentation for complete usage examples.
 
 ## Files used
 

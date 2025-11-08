@@ -12,7 +12,12 @@ import argparse
 import csv
 from pathlib import Path
 from typing import List, Dict
-from csv_utils import read_prompts, write_prompts
+from csv_utils import (
+    read_prompts, write_prompts,
+    read_influences, get_influences_by_category,
+    get_influences_by_status, search_influences,
+    get_random_unexplored_influences
+)
 
 def get_next_prompt_id() -> int:
     """Get the next available prompt ID."""
@@ -57,6 +62,79 @@ def show_parent_candidates(time_block: str):
         print(f"   Rating: {p['Rating']}")
         print()
 
+
+def list_mutations_by_category(category: str = None):
+    """List available mutation influences, optionally filtered by category."""
+    if category:
+        influences = get_influences_by_category(category)
+        print(f"🧬 Mutation influences in '{category}':\n")
+    else:
+        influences = read_influences()
+        print("🧬 All mutation influences:\n")
+
+    if not influences:
+        print(f"   No influences found for category: {category}")
+        return
+
+    # Group by category
+    by_category = {}
+    for inf in influences:
+        cat = inf['Category']
+        if cat not in by_category:
+            by_category[cat] = []
+        by_category[cat].append(inf)
+
+    for cat, items in sorted(by_category.items()):
+        print(f"   {cat} ({len(items)}):")
+        for inf in items:
+            status_icon = {
+                'Unexplored': '○',
+                'Tested': '◐',
+                'Proven': '✓',
+                'Avoid': '✗'
+            }.get(inf['Status'], '?')
+            print(f"     {status_icon} {inf['Influence_ID']:>2}. {inf['Name']}")
+        print()
+
+
+def show_unexplored_mutations(count: int = 10):
+    """Show random unexplored mutation ideas."""
+    influences = get_random_unexplored_influences(count)
+
+    if not influences:
+        print("🎉 All influences have been explored!")
+        return
+
+    print(f"🔍 Suggesting {len(influences)} unexplored mutation ideas:\n")
+
+    for inf in influences:
+        print(f"   {inf['Influence_ID']:>2}. {inf['Name']} ({inf['Category']})")
+        print(f"       Use: {inf['Elements_To_Use'][:80]}...")
+        print(f"       Avoid: {inf['Elements_To_Avoid'][:80]}...")
+        print()
+
+
+def search_mutation_ideas(query: str):
+    """Search mutation influences by text."""
+    results = search_influences(query)
+
+    if not results:
+        print(f"❌ No influences found matching: '{query}'")
+        return
+
+    print(f"🔍 Found {len(results)} influence(s) matching '{query}':\n")
+
+    for inf in results:
+        status_icon = {
+            'Unexplored': '○',
+            'Tested': '◐',
+            'Proven': '✓',
+            'Avoid': '✗'
+        }.get(inf['Status'], '?')
+        print(f"   {status_icon} {inf['Influence_ID']:>2}. {inf['Name']} ({inf['Category']})")
+        print(f"       {inf['Elements_To_Use'][:100]}")
+        print()
+
 def interactive_generate():
     """Interactive prompt generation wizard."""
     print("🧬 GENETIC ALGORITHM PROMPT GENERATOR")
@@ -92,14 +170,38 @@ def interactive_generate():
     except ValueError:
         count = 20
 
+    # Calculate distribution
+    parent_clones = int(count * 0.5)
+    hybrids = int(count * 0.3)
+    mutations = count - parent_clones - hybrids
+
+    print()
+    print(f"📊 Distribution for {count} prompts:")
+    print(f"   50% Parent DNA: {parent_clones} clones")
+    print(f"   30% Hybrids: {hybrids} combinations")
+    print(f"   20% Mutations: {mutations} new DNA")
+    print()
+
+    # Step 4: Show mutation suggestions
+    if mutations > 0:
+        print("🧬 MUTATION IDEAS (20% new DNA):\n")
+        show_unexplored_mutations(mutations)
+
+        print("💡 For more mutation ideas:")
+        print("   - Use `influence-manage --list --category \"<category>\"` to browse by category")
+        print("   - Use `influence-manage --search \"<keyword>\"` to find specific influences")
+        print("   - Use `influence-manage --show <id>` for detailed guidance")
+        print()
+
     print()
     print(f"📝 Ready to generate {count} prompts for '{time_block}'")
     print()
-    print("⚠️  This is a placeholder - actual generation logic needs:")
-    print("   1. Parent prompt selection")
-    print("   2. Hybrid combination rules")
-    print("   3. Mutation instrument library")
-    print("   4. Genre/mood/description templates")
+    print("⚠️  Manual generation workflow:")
+    print("   1. Select parent prompts from candidates above")
+    print("   2. Create variations (parent clones)")
+    print("   3. Combine parents creatively (hybrids)")
+    print("   4. Apply mutation influences from suggestions above")
+    print("   5. Add new prompts to CSV using appropriate tools")
     print()
     print("For now, use this skill as documentation of the process.")
     print("Actual generation is done manually following the genetic algorithm principles.")
@@ -132,6 +234,23 @@ def main():
         action='store_true',
         help='Run interactive generation wizard'
     )
+    parser.add_argument(
+        '--list-mutations',
+        nargs='?',
+        const='all',
+        help='List mutation influences (optionally filter by category)'
+    )
+    parser.add_argument(
+        '--suggest-mutations',
+        type=int,
+        nargs='?',
+        const=10,
+        help='Suggest random unexplored mutations (default: 10)'
+    )
+    parser.add_argument(
+        '--search-mutations',
+        help='Search mutation influences by keyword'
+    )
 
     args = parser.parse_args()
 
@@ -146,6 +265,21 @@ def main():
 
     if args.show_parents:
         show_parent_candidates(args.show_parents)
+        return
+
+    if args.list_mutations:
+        if args.list_mutations == 'all':
+            list_mutations_by_category()
+        else:
+            list_mutations_by_category(args.list_mutations)
+        return
+
+    if args.suggest_mutations is not None:
+        show_unexplored_mutations(args.suggest_mutations)
+        return
+
+    if args.search_mutations:
+        search_mutation_ideas(args.search_mutations)
         return
 
     if args.interactive or not args.time_block:
