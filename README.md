@@ -114,7 +114,7 @@ I tested my initial library. About 30% stood out as noteworthy (good or bad):
 
 Want to hear what this sounds like before diving in?
 
-**[🎵 Example Playlist on Suno](PLAYLIST_URL_HERE)** - Sample tracks from each time block
+**[🎵 Example Playlist on Suno](https://suno.com/playlist/69f255ca-7a9e-427e-9cd9-ccae9b92a436)** - Sample tracks from each time block
 
 This gives you a sense of the neuroscience-informed approach: gentle awakening → sustained focus → re-energizing → wind down. If these help you focus, the workflow will help you generate your own personalized versions.
 
