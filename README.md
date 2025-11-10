@@ -70,8 +70,8 @@ Library evolves to YOUR preferences
 
 ### What I'm Sharing
 
-- **130 starter prompts** organized by time of day
-- **87 musical influences** curated for focus-enhancement (acoustic instruments, electronic effects, rhythmic elements)
+- **Starter prompt library** organized by time of day (currently 130+ prompts, growing)
+- **Curated musical influences** for focus-enhancement (acoustic instruments, electronic effects, rhythmic elements)
 - **Genetic algorithm methodology** for maintaining diversity while improving quality
 - **Claude Code skills** that automate search, generation, rating, and tracking
 - **Research-backed framework** connecting brainwave states to music characteristics
@@ -88,18 +88,18 @@ This workflow automates that learning:
 - **Mutations explore new territory** (finding your hidden preferences)
 - **The library evolves to your taste** (baroque jazz? tropical house? dubstep-influenced ambient?)
 
-My 130 prompts are a **starting point**, not the answer. You'll discover what helps you focus through iteration. That's why the skills workflow is essential - it turns the research finding ("you need to learn what music works for you") into an automated, intelligent system.
+My initial prompt library is a **starting point**, not the answer. You'll discover what helps you focus through iteration. That's why the skills workflow is essential - it turns the research finding ("you need to learn what music works for you") into an automated, intelligent system.
 
 ## What Worked (From My Testing)
 
-I tested all 130 prompts. 40 stood out as noteworthy (good or bad):
+I tested my initial library. About 30% stood out as noteworthy (good or bad):
 - **4 Excellent** (3%) - Prompt #5 (chillsynth jazz fusion), #13 (deep house afro jazz), #27 (ambient house afro), #41 (chillwave boom bap)
 - **14 Very Good** (11%) - Bluegrass/electronica hybrids, impressionist piano, West Coast jazz
 - **15 Pretty Good** (12%) - Solid but not exceptional
 - **4 Okay** (3%) - Too thumpy, wrong energy level
 - **3 Bad** (2%) - Fairy-tale instruments, child's toy sounds
 
-**The remaining 90 prompts are unrated** - not good, not bad, just unremarkable fillers for the playlist. They work fine as background music but didn't stand out enough to rate.
+**The remaining prompts are unrated** - not good, not bad, just unremarkable fillers for the playlist. They work fine as background music but didn't stand out enough to rate.
 
 **Key findings:**
 - Jazz-dominant hybrids work better than pure electronic
@@ -129,7 +129,7 @@ claude  # Opens Claude Code CLI
 ```
 You: "Show me the library stats"
 Claude: [uses prompt-stats skill]
-        → 130 total prompts, 40 rated, 4 excellent...
+        → Total prompts, ratings breakdown, time block distribution...
 
 You: "Find prompts with saxophone"
 Claude: [uses prompt-find skill]
@@ -175,9 +175,9 @@ Claude: [uses prompt-rate skill]
 You: "Generate 20 new morning warmup prompts"
 Claude: [uses prompt-generate skill]
         → Analyzing your ratings...
-        → Found parents: Prompt #4 (Very Good), Prompt #27 (Excellent)
+        → Found parents from your excellent/very good prompts
         → Generating: 10 clones, 6 hybrids, 4 mutations
-        → Added prompts 131-150 to your library
+        → Added 20 new prompts to your library
 
 You: "What mutations did you use?"
 Claude: → Dulcimer, steel pan, vibraphone (unexplored influences)
@@ -217,8 +217,8 @@ But the **Claude Code workflow is the intended experience** - just talk naturall
 - **Prompt #119** (Very Good) - Tropical house balearic, vibraphone, Mediterranean sounds
 
 ### Late Afternoon Push (95-122 BPM)
-- **Prompt #128** (Very Good) - Bluegrass electronica, banjo, mandolin, synth pads
-- **Prompt #130** (Pretty Good) - Nu-disco funk, Wurlitzer, funk guitar, live drums
+- Bluegrass electronica hybrids (Very Good) - Banjo, mandolin, synth pads
+- Nu-disco funk (Pretty Good) - Wurlitzer, funk guitar, live drums
 
 ## The Methodology
 
@@ -231,7 +231,7 @@ Each prompt targets specific mechanisms:
 4. **Arousal modulation** - Steady energy appropriate to time of day
 5. **Biophilic elements** - Field recordings (water, nature) where appropriate
 
-The 87 influences provide diversity: acoustic instruments (dulcimer, sitar, mbira, tabla), electronic effects (dub delay, granular synthesis), rhythmic elements (swing, polyrhythms), textures (field recordings, drones), and genre influences (West Coast jazz, krautrock, balearic beat).
+The influences library provides diversity: acoustic instruments (dulcimer, sitar, mbira, tabla), electronic effects (dub delay, granular synthesis), rhythmic elements (swing, polyrhythms), textures (field recordings, drones), and genre influences (West Coast jazz, krautrock, balearic beat).
 
 Add your own influences by analyzing your listening data. See the scripts for examples.
 
@@ -248,10 +248,10 @@ Percussion matters as much as BPM. Texture should drive, not kick drums.
 
 ## What's in Here
 
-- `programming_music_prompts.csv` - 130 prompts with 40 ratings
-- `influences_library.csv` - 87 curated influences with use/avoid guidance
+- `programming_music_prompts.csv` - Prompt library with ratings (growing collection)
+- `influences_library.csv` - Curated influences with use/avoid guidance
 - `scripts/` - Python utilities for searching, rating, stats
-- `.claude/skills/` - Claude Code automation (optional)
+- `.claude/skills/` - Claude Code automation (the core workflow)
 - `docs/` - [Methodology](docs/genetic-algorithm.md), [Schema](docs/csv-schema.md), [Suno workflow](docs/suno-generation-workflow.md)
 
 ## Practical Questions
@@ -322,7 +322,7 @@ Contributions welcome! Two main areas:
 
 ### 1. Add Musical Influences
 
-The `influences_library.csv` has 87 curated influences. If you've discovered an instrument, effect, or genre that helps your focus:
+The `influences_library.csv` has curated musical influences. If you've discovered an instrument, effect, or genre that helps your focus:
 
 1. Add it to `influences_library.csv` with:
    - **Elements_To_Use**: What aspects support concentration
