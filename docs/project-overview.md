@@ -2,17 +2,24 @@
 
 ## Purpose
 
-Generate a neuroscience-informed library of instrumental focus music for programming work using Suno AI.
+Generate a library of instrumental focus music for programming work using Suno AI, informed by research showing music helps programmers enter flow states and write better code.
+
+## Research Foundation
+
+Lesiuk (2005) found that programmers who listened to music while working wrote better code and completed tasks faster than those in silence. The music helped them enter flow state, improved mood, and maintained optimal arousal. Without music, code quality was poorest and tasks took longest.
+
+This project applies that finding by creating music matched to different times of day—because wrong music at the wrong time adds stress instead of helping.
 
 ## Core Methodology
 
-Music prompts are engineered to induce specific brainwave states:
+Music prompts target specific cognitive states appropriate to time of day:
 
-- **Theta-Gamma Coupling**: Deep focus (Flow state)
-- **Alpha Boost**: Novelty refresh (Combat habituation)
-- **Theta-Alpha Transition**: Gentle awakening
-- **Beta Suppression + Alpha**: Fatigue combat
-- **Alpha to Theta Descent**: Wind-down (Parasympathetic shift)
+- **Morning Warmup** (92-102 BPM): Gentle awakening, theta-alpha transition
+- **Deep Focus Block 1** (95-112 BPM): Building flow state, theta-gamma coupling
+- **Deep Focus Block 2** (96-108 BPM): Sustained focus, fighting fatigue
+- **Midday Refresh** (108-122 BPM): Re-energize, alpha boost
+- **Late Afternoon Push** (95-122 BPM): Final sprint, beta suppression
+- **Evening Wind-Down** (85-95 BPM): Release, parasympathetic shift
 
 ## Key Innovation
 
@@ -28,19 +35,29 @@ Music for programming should be **textural architecture** (sonic scaffolding for
 
 ## Scope
 
-- **70 total prompts**:
-  - 66 prompts organized by workday time blocks
-  - 4 BONUS prompts for edge cases (debugging, creative work, refactoring, late-night)
-- **Each prompt generates 2 versions** in Suno
-- **Quality curation**: Keep excellent versions, discard mediocre ones
+- **130 total prompts** organized by workday time blocks:
+  - Morning Warmup: 32 prompts
+  - Deep Focus Block 1: 21 prompts
+  - Deep Focus Block 2: 34 prompts
+  - Midday Refresh: 11 prompts
+  - Late Afternoon Push: 16 prompts
+  - Evening Wind-Down: 12 prompts
+  - Edge cases: 4 prompts (debugging, creative work, refactoring, late-night)
+- **87 musical influences** curated across 5 categories
+- **Each prompt generates 2 versions** in Suno—keep the best, discard mediocre ones
 
-## Success Criteria
+## Current Status
 
-1. ✅ All 70 prompts generated in Suno
-2. ✅ Genetic diversity maintained (no incestual cloning)
-3. ✅ User ratings captured for excellent prompts
-4. 🔄 Extract common patterns from ⭐ rated prompts
-5. 🔄 Create "best of" playlist for each time block
+- ✅ All 130 prompts generated and catalogued
+- ✅ Genetic diversity maintained through 50/30/20 algorithm
+- ✅ 40 prompts tested and rated (30%)
+  - 4 Excellent (3%)
+  - 14 Very Good (11%)
+  - 15 Pretty Good (12%)
+  - 4 Okay (3%)
+  - 3 Bad (2%)
+- ✅ Key learnings documented (jazz-dominant hybrids work, avoid thumpy kicks, contextual energy matching matters)
+- 🔄 90 prompts remain untested
 
 ## Attribution
 
