@@ -90,14 +90,16 @@ This workflow automates that learning:
 
 My 130 prompts are a **starting point**, not the answer. You'll discover what helps you focus through iteration. That's why the skills workflow is essential - it turns the research finding ("you need to learn what music works for you") into an automated, intelligent system.
 
-## What Worked (From Testing)
+## What Worked (From My Testing)
 
-Out of 130 prompts, I tested 40:
+I tested all 130 prompts. 40 stood out as noteworthy (good or bad):
 - **4 Excellent** (3%) - Prompt #5 (chillsynth jazz fusion), #13 (deep house afro jazz), #27 (ambient house afro), #41 (chillwave boom bap)
 - **14 Very Good** (11%) - Bluegrass/electronica hybrids, impressionist piano, West Coast jazz
 - **15 Pretty Good** (12%) - Solid but not exceptional
 - **4 Okay** (3%) - Too thumpy, wrong energy level
 - **3 Bad** (2%) - Fairy-tale instruments, child's toy sounds
+
+**The remaining 90 prompts are unrated** - not good, not bad, just unremarkable fillers for the playlist. They work fine as background music but didn't stand out enough to rate.
 
 **Key findings:**
 - Jazz-dominant hybrids work better than pure electronic
@@ -105,8 +107,6 @@ Out of 130 prompts, I tested 40:
 - Bluegrass/Appalachian influences work beyond just mornings
 - Techno/motorik drums are too "thumpy" even at correct BPM
 - Contextual energy matching matters: nocturnes at 3pm = disaster
-
-70% remain untested. This is a work in progress.
 
 ## Quick Start
 
@@ -129,7 +129,7 @@ claude  # Opens Claude Code CLI
 ```
 You: "Show me the library stats"
 Claude: [uses prompt-stats skill]
-        → 130 total prompts, 40 tested, 4 excellent...
+        → 130 total prompts, 40 rated, 4 excellent...
 
 You: "Find prompts with saxophone"
 Claude: [uses prompt-find skill]

@@ -50,14 +50,15 @@ Music for programming should be **textural architecture** (sonic scaffolding for
 
 - ✅ All 130 prompts generated and catalogued
 - ✅ Genetic diversity maintained through 50/30/20 algorithm
-- ✅ 40 prompts tested and rated (30%)
+- ✅ All 130 prompts tested in Suno
+- ✅ 40 prompts rated as noteworthy (31%)
   - 4 Excellent (3%)
   - 14 Very Good (11%)
   - 15 Pretty Good (12%)
   - 4 Okay (3%)
   - 3 Bad (2%)
+- ✅ 90 prompts unrated (unremarkable fillers - work fine as background music)
 - ✅ Key learnings documented (jazz-dominant hybrids work, avoid thumpy kicks, contextual energy matching matters)
-- 🔄 90 prompts remain untested
 
 ## Attribution
 
