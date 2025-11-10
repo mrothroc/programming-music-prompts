@@ -1,8 +1,16 @@
-# Programming Music Prompts
+# Music to Code By
 
 **A Claude Code workflow for generating and refining neuroscience-informed music prompts for programming work.**
 
 This isn't a static playlist. It's an **interactive system** using Claude Code skills to help you generate, test, rate, and evolve your own library of programming music prompts matched to your workflow and preferences.
+
+**TLDR**
+- Programming is associated with specific brain wave patterns
+- Music can influence brain wave patterns
+- The right music at the right time helps performance while coding
+- But it has to be something the listener actually likes, so the playlist is personal
+
+I created a system for discovering music generation prompts with Claude skills that work for you. This is currently loaded with my prompts as examples, but you will want to make your own.
 
 ## The Problem
 
@@ -14,7 +22,7 @@ In a field study, Lesiuk (2005) found programmers who listened to music while wo
 
 Lab research supports this: background music helps maintain attention and reduces mind-wandering during focus-intensive tasks. But the key is **personalization** - the listener has to actually like the music. Wrong music at the wrong time adds stress instead of helping.
 
-Most "programming music" playlists ignore this. A chill lo-fi beat at 9am (theta-inducing) does nothing to wake you up. Energetic house music at 3pm when you're already fatigued just adds stress. And that harp? Sounds like a fairy tale. Hard pass.
+Most "programming music" playlists ignore this. A chill lo-fi beat at 9am (theta-inducing) does nothing to wake you up. Energetic house music at 3pm when you're already fatigued just adds stress. And the wrong instrument or vocals or energy just become distracting.
 
 The music needs to match where you are in your day:
 - **Morning** - Gentle awakening (92-102 BPM)
@@ -62,7 +70,7 @@ Library evolves to YOUR preferences
 
 ### What I'm Sharing
 
-- **130 starter prompts** organized by time of day (40 tested, 90 ready to explore)
+- **130 starter prompts** organized by time of day
 - **87 musical influences** curated for focus-enhancement (acoustic instruments, electronic effects, rhythmic elements)
 - **Genetic algorithm methodology** for maintaining diversity while improving quality
 - **Claude Code skills** that automate search, generation, rating, and tracking
