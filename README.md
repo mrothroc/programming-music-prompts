@@ -146,13 +146,18 @@ You: "What's the best prompt to start with?"
 Claude: "Try Prompt #5 - it's rated Excellent for deep focus..."
 
 # Claude shows you the Suno-ready prompt:
-chillsynth, jazz fusion, analog synth pads, electric piano, boom bap drums, 108 BPM, instrumental
+Vintage analog synthesizer pads unfold in slow waves across this chillsynth
+jazz fusion instrumental, anchored by electric piano motifs that repeat with
+hypnotic precision at 108 BPM. Subtle boom bap drum programming provides just
+enough pulse to maintain entrainment, while warm synth bass drones create
+spacious, cathedral-like depth—designed to induce flow state through sonic
+architecture rather than melody, freeing conscious processing for deep work.
 ```
 
 1. Go to [Suno.ai](https://suno.ai)
-2. Click Create → Instrumental mode
-3. Paste the prompt → Create
-4. Wait 2-3 minutes
+2. Click Create → Custom mode → Instrumental
+3. Paste the full prompt into "Song Description"
+4. Click Create → Wait 2-3 minutes
 
 **Step 4: Rate it and the library learns**
 ```
