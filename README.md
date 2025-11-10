@@ -110,6 +110,14 @@ I tested my initial library. About 30% stood out as noteworthy (good or bad):
 
 ## Quick Start
 
+### Listen First
+
+Want to hear what this sounds like before diving in?
+
+**[🎵 Example Playlist on Suno](PLAYLIST_URL_HERE)** - Sample tracks from each time block
+
+This gives you a sense of the neuroscience-informed approach: gentle awakening → sustained focus → re-energizing → wind down. If these help you focus, the workflow will help you generate your own personalized versions.
+
 ### Prerequisites
 
 - **Claude Code** (Claude's official CLI) - [Installation guide](https://docs.claude.com/claude-code)
