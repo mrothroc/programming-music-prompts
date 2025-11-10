@@ -20,11 +20,14 @@ https://doi.org/10.1177/0305735605050650
 - Quality of work was **lowest with no music**
 - Time-on-task was **longest when music was removed** (music increased efficiency)
 - Positive affect (mood) was **lowest without music**
-- Evidence of learning curve: developers learned to use music effectively for mood alteration
+- **Evidence of learning curve: developers learned to use music effectively for mood alteration**
 - Music helped developers enter flow state and maintain optimal arousal
+- **Individual preferences matter: the listener has to like the music for it to help**
 
 **Relevance to This Project:**
-This is the most directly relevant study for programming music. It demonstrates with actual software developers in real work environments that music improves both code quality and task completion speed. The finding that music helps enter flow state validates the approach of using music to target specific cognitive states.
+This is the most directly relevant study for programming music. It demonstrates with actual software developers in real work environments that music improves both code quality and task completion speed.
+
+**Critical insight for the workflow:** The "learning curve" finding validates the need for personalization - programmers got better at choosing effective music over time. The Claude Code skills workflow automates this learning by capturing ratings and using them to generate personalized prompts. What works for one programmer may not work for another, which is why this project provides a **generative workflow**, not a static playlist.
 
 ---
 

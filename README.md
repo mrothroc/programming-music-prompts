@@ -10,7 +10,9 @@ Programming "in the zone" correlates with specific brainwave patterns—theta wa
 
 In a field study, Lesiuk (2005) found programmers who listened to music while working wrote better code and completed tasks faster than those in silence. The music helped them enter flow state, improved mood, and maintained optimal arousal. Without music, code quality was poorest and tasks took longest.
 
-Lab research supports this: background music helps maintain attention and reduces mind-wandering during focus-intensive tasks. The key is matching music to your current state—wrong music at the wrong time adds stress instead of helping.
+**Critical finding:** Programmers showed a **learning curve** - they learned to use music effectively for mood alteration over time. The music had to match their preferences and current state.
+
+Lab research supports this: background music helps maintain attention and reduces mind-wandering during focus-intensive tasks. But the key is **personalization** - the listener has to actually like the music. Wrong music at the wrong time adds stress instead of helping.
 
 Most "programming music" playlists ignore this. A chill lo-fi beat at 9am (theta-inducing) does nothing to wake you up. Energetic house music at 3pm when you're already fatigued just adds stress. And that harp? Sounds like a fairy tale. Hard pass.
 
@@ -67,6 +69,18 @@ Library evolves to YOUR preferences
 - **Research-backed framework** connecting brainwave states to music characteristics
 
 **This is not pre-made music.** You generate it yourself using Suno AI. The value is the **workflow** - you can adapt it, evolve it, and make it yours.
+
+### Why Personalization Matters (Research-Backed)
+
+**Lesiuk (2005) found programmers needed to learn which music worked for them.** There was a learning curve - participants got better at choosing music that enhanced their flow state over the 5-week study.
+
+This workflow automates that learning:
+- **Your ratings capture what works for YOU** (not what worked for me)
+- **Genetic algorithm uses YOUR excellent prompts as parent DNA** (not generic templates)
+- **Mutations explore new territory** (finding your hidden preferences)
+- **The library evolves to your taste** (baroque jazz? tropical house? dubstep-influenced ambient?)
+
+My 130 prompts are a **starting point**, not the answer. You'll discover what helps you focus through iteration. That's why the skills workflow is essential - it turns the research finding ("you need to learn what music works for you") into an automated, intelligent system.
 
 ## What Worked (From Testing)
 
