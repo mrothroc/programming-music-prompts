@@ -316,6 +316,47 @@ This approach draws on research connecting music to programming performance and 
 
 **Note:** Most brainwave entrainment research uses binaural beats (headphones required), not instrumental music at specific BPMs. The programmer EEG studies validate that alpha/beta states matter for coding, but using music tempo to target these states is theoretical. My subjective ratings reflect what worked for me, not validated science.
 
+## Contributing
+
+Contributions welcome! Two main areas:
+
+### 1. Add Musical Influences
+
+The `influences_library.csv` has 87 curated influences. If you've discovered an instrument, effect, or genre that helps your focus:
+
+1. Add it to `influences_library.csv` with:
+   - **Elements_To_Use**: What aspects support concentration
+   - **Elements_To_Avoid**: What destroys focus (critical for programming music)
+   - **Adaptation_Notes**: How to apply it to programming context
+2. Mark it as "Unexplored" initially
+3. Submit a PR explaining why this influence aids programming cognition
+
+**Examples of good influences:**
+- Acoustic instruments with gentle textures (mbira, dulcimer, koto)
+- Electronic effects that add depth without distraction (dub delay, tape saturation)
+- Rhythmic elements that maintain engagement (polyrhythms, swing)
+
+**What to avoid:**
+- Anything inherently attention-grabbing (dramatic builds, complex melodies)
+- Vocals or lyrical associations
+- Overly emotional or nostalgic elements
+
+### 2. Enhance Claude Code Skills
+
+The skills in `.claude/skills/` could be improved:
+
+- **Search enhancements**: Better filtering, fuzzy matching, semantic search
+- **Generation improvements**: More sophisticated genetic algorithm, automated A/B testing
+- **Analytics**: Visualize your library evolution, identify patterns in your ratings
+- **Suno integration**: API integration if/when available (currently manual copy/paste)
+
+See `.claude/SKILLS_README.md` for skill architecture.
+
+**Before contributing code:**
+1. Open an issue to discuss the feature
+2. Keep skills focused and single-purpose
+3. Maintain the conversational Claude Code experience
+
 ## License
 
 MIT - Do what you want. Attribution appreciated.
