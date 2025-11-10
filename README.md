@@ -1,6 +1,8 @@
 # Programming Music Prompts
 
-I generated 130 instrumental music prompts for programming and tested 40 of them. Here's what worked.
+**A Claude Code workflow for generating and refining neuroscience-informed music prompts for programming work.**
+
+This isn't a static playlist. It's an **interactive system** using Claude Code skills to help you generate, test, rate, and evolve your own library of programming music prompts matched to your workflow and preferences.
 
 ## The Problem
 
@@ -22,9 +24,49 @@ I didn't measure brainwaves with EEG. I tested prompts across different times of
 
 ## What This Is
 
-130 music prompts organized by time of day. Each prompt specifies genres, instruments, tempo, and mood to generate instrumental tracks using AI music platforms like Suno.
+**An intelligent workflow for creating personalized programming music**, not a static library.
 
-**This is not pre-made music.** You generate it yourself. The value is in the prompts—I did the experimentation so you don't have to.
+### The Claude Code Skills Workflow
+
+Six interactive skills automate the entire lifecycle:
+
+1. **`prompt-stats`** - View your library statistics and progress
+2. **`prompt-find`** - Search by instrument, genre, BPM, rating, or time block
+3. **`prompt-show`** - Deep-dive into any prompt's details
+4. **`prompt-generate`** - Use genetic algorithm (50% proven DNA + 30% hybrids + 20% mutations) to create new prompts
+5. **`prompt-rate`** - Rate prompts after listening to capture what works for YOU
+6. **`prompt-mark-generated`** - Track which prompts you've tested in Suno
+
+**The workflow:**
+```
+Ask Claude → "Generate 20 new morning warmup prompts"
+   ↓
+Claude uses prompt-generate skill
+   ↓
+Identifies excellent parent prompts (your ratings)
+   ↓
+Generates clones, hybrids, and mutations
+   ↓
+You test in Suno AI
+   ↓
+Ask Claude → "Prompt 87 is excellent, prompt 89 is bad"
+   ↓
+Claude uses prompt-rate skill
+   ↓
+Your ratings feed back into future generation
+   ↓
+Library evolves to YOUR preferences
+```
+
+### What I'm Sharing
+
+- **130 starter prompts** organized by time of day (40 tested, 90 ready to explore)
+- **87 musical influences** curated for focus-enhancement (acoustic instruments, electronic effects, rhythmic elements)
+- **Genetic algorithm methodology** for maintaining diversity while improving quality
+- **Claude Code skills** that automate search, generation, rating, and tracking
+- **Research-backed framework** connecting brainwave states to music characteristics
+
+**This is not pre-made music.** You generate it yourself using Suno AI. The value is the **workflow** - you can adapt it, evolve it, and make it yours.
 
 ## What Worked (From Testing)
 
@@ -46,44 +88,88 @@ Out of 130 prompts, I tested 40:
 
 ## Quick Start
 
-### Try the Best One First
+### Prerequisites
 
-**Prompt #5 (Excellent)** - Deep Focus Block 1
+- **Claude Code** (Claude's official CLI) - [Installation guide](https://docs.claude.com/claude-code)
+- **Suno AI account** - Free tier gives ~5-10 songs/day
+- **Python 3.8+** (for the skills, auto-handled by Claude Code)
+
+### Using the Workflow with Claude
+
+**Step 1: Clone and open in Claude Code**
+```bash
+git clone https://github.com/mrothroc/programming-music-prompts.git
+cd programming-music-prompts
+claude  # Opens Claude Code CLI
 ```
-Genres: chillsynth, jazz fusion
-BPM: 108
-Instruments: analog synth pads, electric piano, boom bap drums, Juno-60 bass
-Mood: hypnotic, architectural, precision
 
-Suno Prompt:
+**Step 2: Explore with natural language**
+```
+You: "Show me the library stats"
+Claude: [uses prompt-stats skill]
+        → 130 total prompts, 40 tested, 4 excellent...
+
+You: "Find prompts with saxophone"
+Claude: [uses prompt-find skill]
+        → Prompt #41 (Excellent): chillwave boom bap with saxophone texture...
+
+You: "Show me prompt 5 in detail"
+Claude: [uses prompt-show skill]
+        → Full details: genres, BPM, instruments, brainwave target...
+```
+
+**Step 3: Generate your first track in Suno**
+```
+You: "What's the best prompt to start with?"
+Claude: "Try Prompt #5 - it's rated Excellent for deep focus..."
+
+# Claude shows you the Suno-ready prompt:
 chillsynth, jazz fusion, analog synth pads, electric piano, boom bap drums, 108 BPM, instrumental
 ```
 
 1. Go to [Suno.ai](https://suno.ai)
 2. Click Create → Instrumental mode
-3. Paste the prompt into "Song Description"
-4. Click Create
-5. Wait 2-3 minutes
+3. Paste the prompt → Create
+4. Wait 2-3 minutes
 
-If it works for you, explore the other 129.
+**Step 4: Rate it and the library learns**
+```
+You: "Prompt 5 is excellent for me too"
+Claude: [uses prompt-rate skill]
+        → Rated! This will influence future generation...
 
-### Browse the Library
-
-```bash
-cd scripts
-python stats.py                          # Library statistics
-python find_prompts.py --rating "Excellent"  # Find rated prompts
-python show_prompt.py 13                 # View specific prompt
+You: "Prompt 89 was too playful, didn't help focus"
+Claude: [uses prompt-rate skill]
+        → Noted as 'Bad'. Won't use celesta in future prompts...
 ```
 
-### Generate Your Own
+**Step 5: Generate your own prompts**
+```
+You: "Generate 20 new morning warmup prompts"
+Claude: [uses prompt-generate skill]
+        → Analyzing your ratings...
+        → Found parents: Prompt #4 (Very Good), Prompt #27 (Excellent)
+        → Generating: 10 clones, 6 hybrids, 4 mutations
+        → Added prompts 131-150 to your library
 
-Use the genetic algorithm to create new prompts:
-- **50% parent DNA** - Clone what works (prompts 5, 13, 27, 41)
-- **30% hybrids** - Mix influences from different parents
-- **20% mutations** - Add influences from the library (87 options)
+You: "What mutations did you use?"
+Claude: → Dulcimer, steel pan, vibraphone (unexplored influences)
+```
 
-See [docs/genetic-algorithm.md](docs/genetic-algorithm.md) for methodology.
+### Or Use the Scripts Directly (Optional)
+
+The skills call these Python scripts. You can run them directly if you prefer:
+
+```bash
+python scripts/stats.py                          # Library statistics
+python scripts/find_prompts.py --rating "Excellent"  # Find rated prompts
+python scripts/show_prompt.py 13                 # View specific prompt
+python scripts/generate_prompts.py --interactive  # Generation wizard
+```
+
+But the **Claude Code workflow is the intended experience** - just talk naturally.
+
+**Why this workflow matters:** The genetic algorithm (50% proven DNA + 30% hybrids + 20% mutations) prevents the library from converging on a single sound while continuously improving quality. Your ratings guide evolution. See [docs/genetic-algorithm.md](docs/genetic-algorithm.md) for methodology.
 
 ## Time Block Examples
 
@@ -152,16 +238,27 @@ Yes. Prompts work with any text-to-music AI (Udio, etc.)
 **Should I automate generation?**
 No. Manual copy/paste is faster. See [docs/suno-automation-summary.md](docs/suno-automation-summary.md).
 
-## Install
+## Installation
 
-**Simple:** Download `programming_music_prompts.csv` and browse it.
+**Recommended:** Use with Claude Code for the full interactive experience
 
-**Full setup:**
 ```bash
-git clone https://github.com/yourusername/programming-music-prompts.git
+# Install Claude Code if you haven't already
+# https://docs.claude.com/claude-code
+
+# Clone this repository
+git clone https://github.com/mrothroc/programming-music-prompts.git
 cd programming-music-prompts
-pip install -r requirements.txt
+
+# Open in Claude Code
+claude
 ```
+
+The skills will automatically set up their Python environment on first use.
+
+**Alternative:** Browse the CSV files directly
+
+If you just want the data without the workflow, download `programming_music_prompts.csv` and `influences_library.csv`.
 
 ## Research References
 
