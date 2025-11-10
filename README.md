@@ -159,6 +159,8 @@ architecture rather than melody, freeing conscious processing for deep work.
 3. Paste the full prompt into "Song Description"
 4. Click Create → Wait 2-3 minutes
 
+NOTE: I normally just generate them in batches of 5, then open the CSV directly to copy and paste.
+
 **Step 4: Rate it and the library learns**
 ```
 You: "Prompt 5 is excellent for me too"
