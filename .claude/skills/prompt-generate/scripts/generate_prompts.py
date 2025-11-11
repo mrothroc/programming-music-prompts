@@ -142,11 +142,137 @@ def search_mutation_ideas(query: str):
         print(f"       {inf['Elements_To_Use'][:100]}")
         print()
 
-def generate_prompts_automated(time_block: str, count: int):
-    """Automated prompt generation using genetic algorithm."""
+def generate_prompts_plan(time_block: str, count: int):
+    """Generate a plan for LLM to write prompts."""
     import random
+    import json
 
-    print(f"🧬 Generating {count} prompts for {time_block}...")
+    print(f"🧬 GENERATION PLAN for {count} prompts for {time_block}")
+    print("=" * 70)
+    print()
+
+    # Find parents
+    parents = find_parent_prompts(time_block)
+    if not parents:
+        print(f"❌ No parent prompts found for '{time_block}'")
+        print("   Need at least one Excellent or Very Good rated prompt.")
+        return
+
+    all_prompts = read_prompts()
+    all_parents = [p for p in all_prompts if 'excellent' in p.get('Rating', '').lower()
+                   or '⭐' in p.get('Rating', '')
+                   or 'very good' in p.get('Rating', '').lower()]
+
+    # Calculate distribution
+    parent_clones = int(count * 0.5)
+    hybrids = int(count * 0.3)
+    mutations = count - parent_clones - hybrids
+
+    # Get mutations
+    mutation_influences = get_random_unexplored_influences(mutations * 2) if mutations > 0 else []
+
+    # Get next ID and BPM range
+    next_id = get_next_prompt_id()
+    block_prompts = [p for p in all_prompts if p['Time_Block'] == time_block and p['BPM']]
+    if block_prompts:
+        bpms = [int(p['BPM']) for p in block_prompts if p['BPM'].isdigit()]
+        min_bpm = min(bpms) if bpms else 95
+        max_bpm = max(bpms) if bpms else 122
+    else:
+        min_bpm, max_bpm = 95, 122
+
+    best_parent = parents[0]
+    brainwave_target = best_parent.get('Brain_Wave_Target', 'Beta Suppression + Alpha')
+    duration_type = best_parent.get('Duration_Type', 'Energy Boost')
+
+    # Build the plan
+    plan = []
+    prompt_id = next_id
+
+    # Parent clones
+    for i in range(parent_clones):
+        parent = random.choice(parents)
+        bpm = random.randint(min_bpm, max_bpm)
+        plan.append({
+            'id': prompt_id,
+            'type': 'clone',
+            'parent_id': parent['Prompt_ID'],
+            'parent_full_prompt': parent.get('Full_Prompt', ''),
+            'bpm': bpm,
+            'genres': parent.get('Primary_Genres', '').strip('"'),
+            'instruments': parent.get('Key_Instruments', '').strip('"'),
+            'mood': parent.get('Mood_Keywords', ''),
+            'brainwave': brainwave_target,
+            'duration': duration_type
+        })
+        prompt_id += 1
+
+    # Hybrids
+    for i in range(hybrids):
+        parent1 = random.choice(parents)
+        parent2 = random.choice(all_parents)
+        bpm = random.randint(min_bpm, max_bpm)
+
+        genres1 = parent1.get('Primary_Genres', '').strip('"').split(',')[0].strip()
+        genres2 = parent2.get('Primary_Genres', '').strip('"').split(',')[0].strip()
+        instr1 = parent1.get('Key_Instruments', '').strip('"').split(',')[:2]
+        instr2 = parent2.get('Key_Instruments', '').strip('"').split(',')[:2]
+
+        plan.append({
+            'id': prompt_id,
+            'type': 'hybrid',
+            'parent1_id': parent1['Prompt_ID'],
+            'parent1_full_prompt': parent1.get('Full_Prompt', ''),
+            'parent2_id': parent2['Prompt_ID'],
+            'parent2_full_prompt': parent2.get('Full_Prompt', ''),
+            'bpm': bpm,
+            'genres': f'"{genres1}, {genres2}"',
+            'instruments': f'"{", ".join(instr1 + instr2)}"',
+            'mood': parent1.get('Mood_Keywords', '').split()[0] if parent1.get('Mood_Keywords') else 'driving',
+            'brainwave': brainwave_target,
+            'duration': duration_type
+        })
+        prompt_id += 1
+
+    # Mutations
+    for i in range(mutations):
+        if i < len(mutation_influences):
+            parent = random.choice(parents)
+            mutation = mutation_influences[i]
+            bpm = random.randint(min_bpm, max_bpm)
+
+            plan.append({
+                'id': prompt_id,
+                'type': 'mutation',
+                'parent_id': parent['Prompt_ID'],
+                'parent_full_prompt': parent.get('Full_Prompt', ''),
+                'mutation_name': mutation.get('Name', ''),
+                'mutation_category': mutation.get('Category', ''),
+                'mutation_use': mutation.get('Elements_To_Use', ''),
+                'mutation_avoid': mutation.get('Elements_To_Avoid', ''),
+                'bpm': bpm,
+                'genres': parent.get('Primary_Genres', '').strip('"'),
+                'base_instruments': parent.get('Key_Instruments', '').strip('"').split(',')[:2],
+                'mood': parent.get('Mood_Keywords', '').split()[0] if parent.get('Mood_Keywords') else 'experimental',
+                'brainwave': brainwave_target,
+                'duration': duration_type
+            })
+            prompt_id += 1
+
+    # Output the plan as JSON
+    print(json.dumps(plan, indent=2))
+    print()
+    print(f"📊 Summary: {parent_clones} clones + {hybrids} hybrids + {mutations} mutations")
+    print(f"🆔 IDs: #{next_id}-#{prompt_id-1}")
+    print()
+    print("💡 LLM should synthesize Full_Prompt descriptions based on this plan.")
+
+def generate_prompts_automated(time_block: str, count: int):
+    """Generate prompt structure using genetic algorithm for LLM to complete."""
+    import random
+    import json
+
+    print(f"🧬 Generating structure for {count} prompts for {time_block}...")
     print()
 
     # Find parents in this time block
@@ -466,8 +592,8 @@ def main():
         interactive_generate()
         return
 
-    # Non-interactive mode - automated generation
-    generate_prompts_automated(args.time_block, args.count)
+    # Non-interactive mode - generate plan for LLM
+    generate_prompts_plan(args.time_block, args.count)
 
 if __name__ == '__main__':
     main()
