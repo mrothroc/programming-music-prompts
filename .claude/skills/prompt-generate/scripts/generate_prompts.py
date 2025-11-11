@@ -24,7 +24,14 @@ def get_next_prompt_id() -> int:
     prompts = read_prompts()
     if not prompts:
         return 1
-    return max(int(p['Prompt_ID']) for p in prompts) + 1
+    # Filter to only numeric IDs
+    numeric_ids = []
+    for p in prompts:
+        try:
+            numeric_ids.append(int(p['Prompt_ID']))
+        except ValueError:
+            pass  # Skip non-numeric IDs like BONUS-1
+    return max(numeric_ids) + 1 if numeric_ids else 1
 
 def find_parent_prompts(time_block: str) -> List[Dict[str, str]]:
     """Find excellent/very good prompts for the given time block."""
@@ -134,6 +141,179 @@ def search_mutation_ideas(query: str):
         print(f"   {status_icon} {inf['Influence_ID']:>2}. {inf['Name']} ({inf['Category']})")
         print(f"       {inf['Elements_To_Use'][:100]}")
         print()
+
+def generate_prompts_automated(time_block: str, count: int):
+    """Automated prompt generation using genetic algorithm."""
+    import random
+
+    print(f"🧬 Generating {count} prompts for {time_block}...")
+    print()
+
+    # Find parents in this time block
+    parents = find_parent_prompts(time_block)
+
+    if not parents:
+        print(f"❌ No parent prompts found for '{time_block}'")
+        print("   Need at least one Excellent or Very Good rated prompt to generate from.")
+        return
+
+    # Get all excellent/very good prompts for cross-breeding
+    all_prompts = read_prompts()
+    all_parents = [p for p in all_prompts if 'excellent' in p.get('Rating', '').lower()
+                   or '⭐' in p.get('Rating', '')
+                   or 'very good' in p.get('Rating', '').lower()]
+
+    # Calculate distribution (50/30/20)
+    parent_clones = int(count * 0.5)
+    hybrids = int(count * 0.3)
+    mutations = count - parent_clones - hybrids
+
+    print(f"📊 Distribution:")
+    print(f"   50% Parent DNA: {parent_clones} clones from {len(parents)} parent(s)")
+    print(f"   30% Hybrids: {hybrids} cross-breeds")
+    print(f"   20% Mutations: {mutations} with new influences")
+    print()
+
+    # Get mutation suggestions
+    mutation_influences = get_random_unexplored_influences(mutations * 2) if mutations > 0 else []
+
+    # Get next ID
+    next_id = get_next_prompt_id()
+
+    # Get BPM range for this time block from existing prompts
+    block_prompts = [p for p in all_prompts if p['Time_Block'] == time_block and p['BPM']]
+    if block_prompts:
+        bpms = [int(p['BPM']) for p in block_prompts if p['BPM'].isdigit()]
+        min_bpm = min(bpms) if bpms else 95
+        max_bpm = max(bpms) if bpms else 122
+    else:
+        min_bpm, max_bpm = 95, 122
+
+    # Get brainwave target from best parent
+    best_parent = parents[0]
+    brainwave_target = best_parent.get('Brain_Wave_Target', 'Beta Suppression + Alpha')
+    duration_type = best_parent.get('Duration_Type', 'Energy Boost')
+
+    generated_prompts = []
+    prompt_id = next_id
+
+    # Generate parent clones
+    print(f"🧬 Generating {parent_clones} parent clones...")
+    for i in range(parent_clones):
+        parent = random.choice(parents)
+        bpm = random.randint(min_bpm, max_bpm)
+
+        # Parse parent genres and instruments
+        genres = parent.get('Primary_Genres', '').strip('"')
+        instruments = parent.get('Key_Instruments', '').strip('"')
+        mood = parent.get('Mood_Keywords', '')
+
+        prompt = {
+            'Prompt_ID': str(prompt_id),
+            'Time_Block': time_block,
+            'BPM': str(bpm),
+            'Brain_Wave_Target': brainwave_target,
+            'Duration_Type': duration_type,
+            'Primary_Genres': genres,
+            'Key_Instruments': instruments,
+            'Mood_Keywords': mood,
+            'Suno_Short_Prompt': '',
+            'Full_Prompt': f"[Generated] Clone of prompt #{parent['Prompt_ID']} at {bpm} BPM. {genres} with {instruments}. {mood}.",
+            'Notes': f"Parent #{parent['Prompt_ID']} clone (proven DNA). Auto-generated.",
+            'Generated': 'No',
+            'Suno_Refined': '',
+            'Rating': ''
+        }
+        generated_prompts.append(prompt)
+        print(f"   #{prompt_id}: Clone of #{parent['Prompt_ID']} ({genres}) at {bpm} BPM")
+        prompt_id += 1
+
+    # Generate hybrids
+    print(f"\n🧬 Generating {hybrids} hybrid combinations...")
+    for i in range(hybrids):
+        parent1 = random.choice(parents)
+        parent2 = random.choice(all_parents)
+        bpm = random.randint(min_bpm, max_bpm)
+
+        # Combine genres and instruments
+        genres1 = parent1.get('Primary_Genres', '').strip('"').split(',')[0].strip()
+        genres2 = parent2.get('Primary_Genres', '').strip('"').split(',')[0].strip()
+
+        instr1 = parent1.get('Key_Instruments', '').strip('"').split(',')[:2]
+        instr2 = parent2.get('Key_Instruments', '').strip('"').split(',')[:2]
+        combined_instruments = ', '.join(instr1 + instr2)
+
+        mood1 = parent1.get('Mood_Keywords', '').split()[0] if parent1.get('Mood_Keywords') else 'driving'
+        mood2 = parent2.get('Mood_Keywords', '').split()[0] if parent2.get('Mood_Keywords') else 'hypnotic'
+
+        prompt = {
+            'Prompt_ID': str(prompt_id),
+            'Time_Block': time_block,
+            'BPM': str(bpm),
+            'Brain_Wave_Target': brainwave_target,
+            'Duration_Type': duration_type,
+            'Primary_Genres': f'"{genres1}, {genres2}"',
+            'Key_Instruments': f'"{combined_instruments}"',
+            'Mood_Keywords': f'{mood1} {mood2} sophisticated hybrid',
+            'Suno_Short_Prompt': '',
+            'Full_Prompt': f"[Generated] Hybrid of prompts #{parent1['Prompt_ID']} and #{parent2['Prompt_ID']} at {bpm} BPM. {genres1} meets {genres2} with {combined_instruments}.",
+            'Notes': f"Hybrid: Parent #{parent1['Prompt_ID']} + Parent #{parent2['Prompt_ID']}. Auto-generated.",
+            'Generated': 'No',
+            'Suno_Refined': '',
+            'Rating': ''
+        }
+        generated_prompts.append(prompt)
+        print(f"   #{prompt_id}: {genres1} + {genres2} at {bpm} BPM")
+        prompt_id += 1
+
+    # Generate mutations
+    print(f"\n🧬 Generating {mutations} mutations with new influences...")
+    for i in range(mutations):
+        if i < len(mutation_influences):
+            parent = random.choice(parents)
+            mutation = mutation_influences[i]
+            bpm = random.randint(min_bpm, max_bpm)
+
+            genres = parent.get('Primary_Genres', '').strip('"')
+            base_instruments = parent.get('Key_Instruments', '').strip('"').split(',')[:2]
+            mutation_name = mutation.get('Name', 'unknown')
+
+            combined_instruments = ', '.join(base_instruments + [mutation_name.lower()])
+            mood = parent.get('Mood_Keywords', '').split()[0] if parent.get('Mood_Keywords') else 'experimental'
+
+            prompt = {
+                'Prompt_ID': str(prompt_id),
+                'Time_Block': time_block,
+                'BPM': str(bpm),
+                'Brain_Wave_Target': brainwave_target,
+                'Duration_Type': duration_type,
+                'Primary_Genres': genres,
+                'Key_Instruments': f'"{combined_instruments}"',
+                'Mood_Keywords': f'{mood} experimental mutation',
+                'Suno_Short_Prompt': '',
+                'Full_Prompt': f"[Generated] Mutation of prompt #{parent['Prompt_ID']} with {mutation_name} at {bpm} BPM. Testing unexplored influence: {mutation['Category']}.",
+                'Notes': f"Mutation: {mutation_name} ({mutation['Category']}). Based on prompt #{parent['Prompt_ID']}. Auto-generated.",
+                'Generated': 'No',
+                'Suno_Refined': '',
+                'Rating': ''
+            }
+            generated_prompts.append(prompt)
+            print(f"   #{prompt_id}: {genres} + {mutation_name} at {bpm} BPM")
+            prompt_id += 1
+
+    # Write to CSV
+    print(f"\n💾 Writing {len(generated_prompts)} prompts to CSV...")
+    all_prompts = read_prompts()
+    all_prompts.extend(generated_prompts)
+    write_prompts(all_prompts)
+
+    print(f"✅ Successfully generated prompts #{next_id}-#{prompt_id-1}")
+    print()
+    print("📝 Next steps:")
+    print(f"   1. Review generated prompts: prompt-show {next_id}")
+    print(f"   2. Generate in Suno (mark with prompt-mark-generated)")
+    print(f"   3. Rate the results (prompt-rate)")
+    print()
 
 def interactive_generate():
     """Interactive prompt generation wizard."""
@@ -286,9 +466,8 @@ def main():
         interactive_generate()
         return
 
-    # Non-interactive mode
-    print(f"Generating {args.count} prompts for {args.time_block}...")
-    print("(Not yet implemented - use interactive mode)")
+    # Non-interactive mode - automated generation
+    generate_prompts_automated(args.time_block, args.count)
 
 if __name__ == '__main__':
     main()

@@ -26,10 +26,13 @@ def write_prompts(prompts: List[Dict[str, str]]):
     if not prompts:
         raise ValueError("Cannot write empty prompts list")
 
-    fieldnames = list(prompts[0].keys())
+    # Use standard fieldnames from the CSV schema
+    fieldnames = ['Prompt_ID', 'Time_Block', 'BPM', 'Brain_Wave_Target', 'Duration_Type',
+                  'Primary_Genres', 'Key_Instruments', 'Mood_Keywords', 'Suno_Short_Prompt',
+                  'Full_Prompt', 'Notes', 'Generated', 'Suno_Refined', 'Rating']
 
     with open(CSV_PATH, 'w', encoding='utf-8', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
         writer.writeheader()
         writer.writerows(prompts)
 
