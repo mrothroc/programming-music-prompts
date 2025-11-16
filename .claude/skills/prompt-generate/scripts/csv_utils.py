@@ -220,6 +220,78 @@ def get_random_unexplored_influences(count: int = 5, category: str = None) -> Li
     return random.sample(influences, count)
 
 
+def get_weighted_mutation_influences(count: int = 5) -> List[Dict[str, str]]:
+    """
+    Get mutation influences weighted by prompt ratings across all time blocks.
+
+    Strategy:
+    1. Extract instruments/genres from highly-rated prompts (excellent, very good)
+    2. Match against influences library
+    3. Prioritize unexplored influences that appear in rated prompts
+    4. Fall back to random unexplored if no matches
+
+    Returns influences weighted toward what's worked well in other time blocks.
+    """
+    import random
+    from collections import Counter
+
+    prompts = read_prompts()
+    influences = read_influences()
+
+    # Get highly-rated prompts across ALL time blocks
+    rated_prompts = [p for p in prompts if 'excellent' in p.get('Rating', '').lower()
+                     or '⭐' in p.get('Rating', '')
+                     or 'very good' in p.get('Rating', '').lower()]
+
+    # Extract instruments from rated prompts
+    rated_instruments = []
+    for p in rated_prompts:
+        instruments = p.get('Key_Instruments', '').lower()
+        # Split by comma and clean up
+        for instr in instruments.split(','):
+            rated_instruments.append(instr.strip())
+
+    # Count frequency of instruments in rated prompts
+    instrument_freq = Counter(rated_instruments)
+
+    # Score unexplored influences by how often they appear in rated prompts
+    unexplored = get_influences_by_status('Unexplored')
+    scored_influences = []
+
+    for inf in unexplored:
+        name_lower = inf['Name'].lower()
+        # Check if influence name appears in rated instruments
+        score = 0
+        for instr, freq in instrument_freq.items():
+            if name_lower in instr or instr in name_lower:
+                score += freq
+
+        scored_influences.append((score, inf))
+
+    # Sort by score (highest first), then shuffle within same score
+    scored_influences.sort(key=lambda x: x[0], reverse=True)
+
+    # Take weighted selection: 70% from top-scoring, 30% random for diversity
+    weighted_count = int(count * 0.7)
+    random_count = count - weighted_count
+
+    result = []
+
+    # Get top-scoring influences (those that appear in rated prompts)
+    top_scored = [inf for score, inf in scored_influences if score > 0]
+    if top_scored and weighted_count > 0:
+        result.extend(random.sample(top_scored, min(weighted_count, len(top_scored))))
+
+    # Fill remaining with random unexplored
+    remaining_needed = count - len(result)
+    if remaining_needed > 0:
+        available = [inf for score, inf in scored_influences if inf not in result]
+        if available:
+            result.extend(random.sample(available, min(remaining_needed, len(available))))
+
+    return result[:count]
+
+
 if __name__ == "__main__":
     # Quick test
     stats = get_stats()

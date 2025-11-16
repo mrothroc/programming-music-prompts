@@ -16,7 +16,8 @@ from csv_utils import (
     read_prompts, write_prompts,
     read_influences, get_influences_by_category,
     get_influences_by_status, search_influences,
-    get_random_unexplored_influences
+    get_random_unexplored_influences,
+    get_weighted_mutation_influences
 )
 
 def get_next_prompt_id() -> int:
@@ -34,14 +35,16 @@ def get_next_prompt_id() -> int:
     return max(numeric_ids) + 1 if numeric_ids else 1
 
 def find_parent_prompts(time_block: str) -> List[Dict[str, str]]:
-    """Find excellent/very good prompts for the given time block."""
+    """Find excellent/very good/pretty good prompts for the given time block."""
     prompts = read_prompts()
     parents = []
 
     for p in prompts:
         if p['Time_Block'] == time_block:
             rating = p.get('Rating', '').lower()
-            if 'excellent' in rating or '⭐' in rating or 'very good' in rating:
+            # Include: Excellent, Very Good, Pretty Good
+            if ('excellent' in rating or '⭐' in rating or
+                'very good' in rating or 'pretty good' in rating):
                 parents.append(p)
 
     return parents
@@ -158,6 +161,15 @@ def generate_prompts_plan(time_block: str, count: int):
         print("   Need at least one Excellent or Very Good rated prompt.")
         return
 
+    # DIVERSITY CHECK: Warn if only 1 parent
+    if len(parents) == 1:
+        print(f"⚠️  WARNING: Only 1 parent found (#{parents[0]['Prompt_ID']})")
+        print(f"   This may lead to genetic incest (too much similarity)")
+        print(f"   Consider:")
+        print(f"   - Rating more prompts as 'Pretty good' to expand parent pool")
+        print(f"   - Using mutations to inject diversity")
+        print()
+
     all_prompts = read_prompts()
     all_parents = [p for p in all_prompts if 'excellent' in p.get('Rating', '').lower()
                    or '⭐' in p.get('Rating', '')
@@ -168,8 +180,8 @@ def generate_prompts_plan(time_block: str, count: int):
     hybrids = int(count * 0.3)
     mutations = count - parent_clones - hybrids
 
-    # Get mutations
-    mutation_influences = get_random_unexplored_influences(mutations * 2) if mutations > 0 else []
+    # Get mutations - weighted by what's worked well in other time blocks
+    mutation_influences = get_weighted_mutation_influences(mutations * 2) if mutations > 0 else []
 
     # Get next ID and BPM range
     next_id = get_next_prompt_id()

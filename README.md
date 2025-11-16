@@ -245,6 +245,24 @@ The influences library provides diversity: acoustic instruments (dulcimer, sitar
 
 Add your own influences by analyzing your listening data. See the scripts for examples.
 
+### Fighting "AI Slop" Convergence
+
+**Inspiration:** Anthropic's blog post ["Improving frontend design through skills"](https://www.claude.com/blog/improving-frontend-design-through-skills)
+
+Like UI design, music prompts naturally converge toward "on-distribution" outputs—the same safe combinations (piano + ambient pads, lo-fi beats) that dominate training data. Without active intervention, AI-generated music sounds generic.
+
+The blog post identifies how LLMs default to common patterns (Inter fonts, purple gradients) and provides a framework for pushing toward distinctive outputs through explicit guidance. We've adapted this approach to music generation:
+
+**Our anti-convergence strategy:**
+- **Instrumentation specificity**: "Klaus Schulze-inspired Moog modular pads" vs "synth pads"
+- **Artist/gear references**: "Steely Dan-inspired Rhodes," "J Dilla swing quantization," "Debussy whole-tone scales"
+- **Technique detail**: "Resonant filter sweeps creating vowel-like formants," "contrapuntal bass motion"
+- **Cultural aesthetics**: "Mali-Detroit-Bronx fusion," "Japanese 'ma' negative space," "kosmische musik"
+
+The prompt-generate skill includes explicit anti-convergence guidance (see `.claude/skills/prompt-generate/SKILL.md`) reminding Claude to avoid generic descriptions and push for distinctive, specific prompts. This creates music that sounds genuinely designed for the neuroscience goal, not just "focus music."
+
+**Key difference from the blog:** Suno struggles with negative language ("not bluegrass picking" primes it to generate bluegrass), so we use only positive descriptions of what we WANT rather than what to avoid.
+
 ## What Doesn't Work
 
 From testing:

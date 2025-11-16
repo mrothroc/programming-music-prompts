@@ -26,13 +26,62 @@ This skill generates new music prompts using the genetic algorithm approach to m
 - User asks to "generate new prompts"
 - User wants to apply genetic algorithm approach
 
+## 🎯 Core Principle: Avoid "AI Slop" Convergence
+
+Like generic UI design (Inter fonts, purple gradients), music prompts naturally converge toward "on-distribution" outputs—the same safe combinations that dominate training data. Without active intervention, you'll generate generic ambient/lo-fi with piano, guitar, and synth pads.
+
+**Fight distributional convergence. Make creative, distinctive prompts that surprise and delight.**
+
+### Focus on Distinctiveness
+
+**Instrumentation**: Choose beautiful, unique, and interesting instruments. Avoid overused defaults (generic synth pads, simple piano, basic guitar). Opt instead for distinctive choices that elevate the music's character:
+- ✅ Balafon, mbira, bansuri flute, autoharp, Debussy-style piano techniques
+- ✅ Wordless vocals as texture, chorus-drenched guitar pads, talking drums
+- ✅ Jazz clarinet (Benny Goodman-style), vibraphone, Indian tabla
+- ❌ "Synth pads," "ambient piano," "soft guitar" (too generic)
+
+**Genre & Theme**: Commit to a cohesive, specific aesthetic. Dominant characteristics with sharp contrasts outperform timid, evenly-distributed descriptions. Reference specific artists/movements for clarity:
+- ✅ "Steely Dan-inspired Fender Rhodes voicings with studio perfection"
+- ✅ "The Cure-style chorus-drenched guitar pads"
+- ✅ "Debussy-inspired impressionist piano with whole-tone scales"
+- ❌ "Ambient electronic music" (lacks distinctive character)
+
+**Temporal Character**: Use vivid descriptions of HOW rhythm works. One well-orchestrated rhythmic concept creates more interest than scattered generic descriptions:
+- ✅ "Ritual precision," "cascading arpeggios," "polyrhythmic layers," "tremolo shimmer"
+- ✅ "Four-on-floor pulse with talking drum polyrhythms"
+- ✅ "Hypnotic repetitive patterns in trance-inducing cycles"
+- ❌ "Steady beat," "rhythmic pattern" (lacks specificity)
+
+**Textural Depth**: Create atmosphere through layered, specific techniques rather than defaulting to vague descriptors:
+- ✅ "Chorus effect creating spatial depth," "whole-tone scales creating aquatic textures"
+- ✅ "Metallic shimmer from mbira polyrhythmic layers"
+- ✅ "Woody resonance with subtle vibrato, gentle swing phrasing"
+- ❌ "Atmospheric," "ambient," "textural" (too generic)
+
+### Avoid Generic "Focus Music" Aesthetics
+
+- **Overused instruments**: Generic synth pads, simple piano, basic acoustic guitar without specific technique
+- **Clichéd combinations**: Piano + rain sounds, lo-fi beats, generic ambient drones
+- **Predictable patterns**: "Soft melody over gentle rhythm" without distinctive character
+- **Cookie-cutter descriptions**: Lacking artist references, specific techniques, or contextual detail
+
+### Critical: You Still Converge on Common Choices
+
+Even with the genetic algorithm, you tend to reuse Rhodes, vibraphone, and tabla across generations. The 50/30/20 split provides structure, but **YOU must push for genuine distinctiveness within each type**:
+
+- **Clones (50%)**: Don't just copy—change ONE distinctive element (different technique, reference artist, or textural approach)
+- **Hybrids (30%)**: Create genuinely NEW combinations, not just "parent A's instruments + parent B's instruments in sequence"
+- **Mutations (20%)**: CENTER the new influence as PRIMARY element, not just accent
+
+**Interpret creatively.** Make unexpected choices that feel genuinely designed for the neuroscience goal, not just "programming music." Vary instruments, aesthetics, and techniques dramatically across generations.
+
 ## Genetic Algorithm Strategy
 
 ### 50% Parent DNA (Proven Excellence)
 Clone prompts that have been rated as excellent or very good:
 - Preserve the exact formula that works
 - Vary BPM slightly (±1-3 BPM)
-- Adjust mood keywords for variety
+- **Change ONE distinctive element** (technique, artist reference, or textural detail)
 - Keep core instruments and genres
 
 ### 30% Hybrids (Cross-breeding)
@@ -41,13 +90,18 @@ Combine elements from two different parent prompts:
 - Blend genres creatively
 - Combine rhythmic patterns
 - Create acoustic-electronic fusions
+- **Write COMPLETELY NEW descriptions** that genuinely blend both parents
 
 ### 20% Mutations (New DNA)
-Introduce new instruments or effects:
-- Explore uncharted sonic territory
+Introduce new instruments or effects weighted by cross-block success:
+- **70% weighted**: Prioritize influences that appear in highly-rated prompts from other time blocks
+- **30% random**: Explore completely uncharted sonic territory for diversity
 - Add unique textures (mellotron, EBow, steel pan, etc.)
 - Try new rhythmic elements (swing, dub delay)
 - Test unconventional combinations
+- **CENTER mutation as PRIMARY element**, not accent
+
+**Cross-block learning**: If vibraphone gets "excellent" in Midday Refresh, it's prioritized for mutations in other blocks that need similar energy.
 
 ## Usage examples
 
@@ -93,6 +147,252 @@ python generate_prompts.py --time-block "Midday Refresh" --count 20
 5. **Review & Refine**: Ensure quality and diversity
 6. **Add to CSV**: Append to `programming_music_prompts.csv`
 7. **Commit**: Version control the new prompts
+
+## 🚨 CRITICAL: Synthesis Discipline (Prevent Lazy Copy-Paste)
+
+**Problem**: It's tempting to copy a parent prompt, add a few words about the new influence, and call it done. This creates a library of nearly identical prompts that defeats the genetic diversity goal.
+
+**The Script-LLM Hybrid Workflow**:
+
+1. **Script outputs JSON plan** with:
+   - Parent prompts (for reference)
+   - Target BPM, genres, instruments
+   - For mutations: `Elements_To_Use`, `Elements_To_Avoid` from influences library
+
+2. **LLM (you) synthesizes the actual Full_Prompt** based on prompt type:
+
+### For Parent Clones (50%)
+
+**Goal**: Preserve proven formula with minor variation
+
+✅ **Correct approach**:
+```
+1. Copy parent's Full_Prompt text
+2. Adjust BPM (±1-3 BPM)
+3. Optionally vary ONE small element (e.g., "brushed hi-hats" → "soft tambourine")
+4. Keep everything else identical
+```
+
+❌ **Wrong approach**: Creating significant variations (that's what hybrids are for)
+
+### For Hybrids (30%)
+
+**Goal**: Genuinely blend two parent prompts' sonic characteristics
+
+✅ **Correct approach**:
+```
+1. Read BOTH parent prompts completely
+2. Write a COMPLETELY NEW prompt from scratch that:
+   - Takes rhythmic foundation from Parent A
+   - Takes harmonic texture from Parent B
+   - Blends instrumentation (e.g., Parent A's guitar + Parent B's synth pads)
+   - Creates a cohesive sonic identity (not a list of disparate elements)
+3. DO NOT copy/paste text from either parent
+```
+
+❌ **Wrong approach**:
+```
+1. Copy Parent A's prompt
+2. Add "with influences from Parent B" or similar lazy addition
+3. Result: Parent A with a tacked-on mention of Parent B
+```
+
+**Real example of WRONG hybrid synthesis** (from Midday Refresh generation):
+- Parent A: "Sophisticated West Coast jazz instrumentation meets tropical house production..."
+- Parent B: "Sophisticated Latin jazz-meets-house creates uplifting midday energy..."
+- Lazy hybrid: "Sophisticated West Coast jazz instrumentation meets tropical house production..." (nearly identical to Parent A)
+
+**What the hybrid SHOULD have been**:
+```
+Blend West Coast jazz trumpet phrasing (Parent A) with Latin percussion
+patterns (Parent B). Four-on-floor anchors the groove while congas and
+timbales add syncopation. Fender Rhodes provides harmonic bed, referencing
+both jazz tradition and house music warmth. The result is energizing but
+sophisticated—uptempo Latin rhythm with cool West Coast restraint.
+```
+
+### For Mutations (20%)
+
+**Goal**: Center the new influence while using parent as foundation
+
+✅ **Correct approach**:
+```
+1. Read parent prompt to understand time block context
+2. Read mutation's Elements_To_Use and Elements_To_Avoid
+3. Write a COMPLETELY NEW prompt from scratch that:
+   - Centers the mutation influence as the PRIMARY sonic element
+   - Uses parent's BPM range, brainwave target, and energy level as context
+   - Applies adaptation notes from influences library
+   - Creates a distinct sonic identity around the mutation
+4. DO NOT copy/paste text from parent
+```
+
+❌ **Wrong approach**:
+```
+1. Copy parent prompt
+2. Add "featuring [mutation influence]" at the beginning or end
+3. Result: Parent prompt with mutation mentioned but not centered
+```
+
+**Real example of WRONG mutation synthesis** (from Midday Refresh generation):
+- Parent: "Sophisticated West Coast jazz instrumentation meets tropical house production..."
+- Mutation: Surf rock (reverb texture, Dick Dale influence)
+- Lazy mutation: "Sophisticated West Coast jazz instrumentation meets tropical house production with surf rock reverb textures..."
+
+**What the mutation SHOULD have been**:
+```
+Dick Dale-inspired reverb drenches sustained organ chords, creating
+shimmering texture without aggressive surf melody. Four-on-floor kick
+grounds the reverb wash while crisp hi-hats add brightness. Spring reverb
+and tremolo reference surf tradition, but slow harmonic pace (108 BPM)
+prevents frenetic energy—textural depth for midday refresh without
+distraction.
+```
+
+## 🚨 CRITICAL: Suno 1000 Character Limit
+
+**Suno enforces a strict 1000 character maximum for the Full_Prompt field.**
+
+This is a HARD LIMIT - prompts that exceed 1000 characters will be truncated or rejected.
+
+### Writing Within the Limit
+
+**Strategy**: Be concise and specific, not verbose and generic.
+
+✅ **Good (specific, concise)**:
+```
+"Moog modular pads unfold in Klaus Schulze-inspired cathedral swells at 103 BPM,
+their cosmic waves providing vast space beneath Wurlitzer loops with metronomic
+precision. Roland TR-808 boom bap provides minimal pulse while Minimoog bass
+drones create tectonic foundation—Berlin school ambition meeting hip-hop restraint
+for theta-gamma coupling through spatial immensity."
+```
+Character count: ~385
+
+❌ **Bad (verbose, exceeds limit)**:
+```
+Long-winded explanations of every technical detail, neuroscience mechanisms
+spelled out repeatedly, redundant descriptions...
+```
+
+### Conciseness Techniques
+
+1. **Cut neuroscience explanations** - Don't explain "tempo entrainment (103 BPM = theta-gamma coupling)" in every prompt
+2. **Remove redundant phrases** - "creating textures that support flow states for deep work" can be "supporting flow states"
+3. **Use em-dashes** - Connect ideas efficiently: "Rhodes filtered to sine purity—extreme low-pass removes attack"
+4. **Artist/gear references over descriptions** - "Klaus Schulze-inspired" vs "cosmic ambient electronic textures"
+5. **Prioritize sonic detail** - Cut philosophy, keep technique
+
+**Target**: 600-900 characters for safety margin and editorial flexibility.
+
+## Verification Checklist
+
+After generating prompts, verify:
+
+- [ ] **Character limit**: Each Full_Prompt is under 1000 characters (target: 600-900)
+- [ ] **Clones**: Only BPM and one small element changed?
+- [ ] **Hybrids**: Did I write a NEW prompt? Can I identify characteristics from BOTH parents?
+- [ ] **Mutations**: Is the mutation the PRIMARY sonic element, not just mentioned?
+- [ ] **Distinctness**: Do all prompts sound different when read aloud?
+- [ ] **Time block fit**: Does each prompt match the energy level and brainwave target?
+- [ ] **Diversity check**: Are more than 3 out of 5 prompts using the same parent or genre?
+- [ ] **Positive language**: Describe what you WANT, not what you DON'T want (see below)
+
+If any hybrids or mutations could be mistaken for simple clones, rewrite them following the correct approach above.
+
+## 🚨 CRITICAL: Use Positive Language Only ("Pink Elephant" Problem)
+
+**Problem**: Like image generators, Suno LLMs struggle with negative instructions. Saying "not bluegrass picking" primes the model to think about bluegrass picking.
+
+**Wrong approach**:
+```
+"Mandolin creates tremolo at 96 BPM—not bluegrass picking, but sustained texture..."
+```
+Result: Suno focuses on "bluegrass picking" and generates bluegrass anyway.
+
+**Right approach**:
+```
+"Mandolin creates gentle tremolo shimmer at 96 BPM through sustained single-note
+technique that produces organic shimmer texture."
+```
+Result: Describes the desired technique without mentioning unwanted genres.
+
+### How to Avoid Genre Associations:
+
+When adapting instruments with strong genre associations:
+
+**Don't mention the unwanted genre at all** - instead describe:
+1. **Technique**: "tremolo on held notes," "slow glissandos," "sparse plucks"
+2. **Texture**: "shimmering sustain," "smooth vocal-like slides," "metallic sparkle"
+3. **Aesthetic**: "vintage folk-rock," "tropical warmth," "Hawaiian smoothness"
+4. **Context**: "British folk-rock aesthetic" (shifts away from American bluegrass)
+
+**Examples**:
+
+❌ **Wrong** (mentions unwanted genre):
+- "Mandolin tremolo, not fast bluegrass picking"
+- "Steel drums without Caribbean clichés"
+- "Banjo texture avoiding country twang"
+
+✅ **Right** (describes desired outcome):
+- "Mandolin sustained tremolo on held notes creates shimmering texture"
+- "Steel drums provide gentle melodic shimmer through soft mallet technique"
+- "Banjo fingerpicked arpeggios float through ambient space with sparse touches"
+
+### Note on Suno_Refined Field:
+
+The user only uses the **Full_Prompt** field for generation, not Suno_Refined. Therefore:
+- Don't populate Suno_Refined with negative prompts
+- Keep all instructions positive in Full_Prompt
+- Suno_Refined should remain empty unless specifically requested
+
+## 🚨 CRITICAL: Preventing Genetic Incest
+
+**Problem**: Over-reliance on a single parent creates a library that lacks diversity.
+
+**Warning signs**:
+- Script shows "⚠️ WARNING: Only 1 parent found"
+- More than 3 out of 5 prompts use the same genre/parent
+- All mutations are variations of the same base (e.g., all bluegrass mutations)
+
+**When you see this**:
+
+1. **Check the parent pool**: How many rated prompts exist for this time block?
+   - If only 1 parent: Expand by including "Pretty good" rated prompts
+   - The script now includes "Pretty good" in parent search automatically
+
+2. **Diversify your selections**:
+   - **Clones**: If only 1 parent exists, clone it at most ONCE (20% not 50%)
+   - **Hybrids**: Cross-breed with parents from OTHER time blocks that match the energy level
+   - **Mutations**: Use mutations heavily (60-80% instead of 20%) to inject diversity
+
+3. **Cross-time-block hybrids**:
+   - Morning Warmup + Midday Refresh = Gentle energy boost
+   - Deep Focus Block 1 + Deep Focus Block 2 = Extended flow variations
+   - Late Afternoon Push can borrow from Midday Refresh (both energizing)
+
+**Example fix for single-parent situation**:
+```
+Time block has only 1 "Very good" parent (#128 - bluegrass)
+
+Instead of:
+- 3 clones of #128 (genetic incest!)
+- 1 hybrid #128 + something
+- 1 mutation from #128
+
+Do this:
+- 1 clone of #128 (20%)
+- 1 hybrid #128 + Midday Refresh parent (cross-block) (20%)
+- 3 mutations with diverse influences (60%)
+  - Lap steel (NOT bluegrass)
+  - Nu-disco/funk texture
+  - Electronic/synth-based
+```
+
+**Ask the user**: If the script warns about limited parents, ask whether to:
+1. Proceed with mutation-heavy approach (60-80% mutations)
+2. Cross-breed with other time blocks that match energy
+3. Wait and rate more prompts first
 
 ## Example: Morning Warmup Generation
 
