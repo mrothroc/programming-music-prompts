@@ -385,6 +385,15 @@ See `.claude/SKILLS_README.md` for skill architecture.
 2. Keep skills focused and single-purpose
 3. Maintain the conversational Claude Code experience
 
+## About
+
+Built by [Michael Rothrock](https://michael.roth.rocks/) — CTO and author of
+research on AI agent reliability. This project uses Claude Code skills as the
+control layer over a personal music library; the same workflow pattern (a
+pipeline of agents producing artifacts with verification gates between stages)
+is the subject of [Trust Topology](https://michael.roth.rocks/research/trust-topology/),
+a framework for engineering reliable systems from unreliable AI agents.
+
 ## License
 
 MIT - Do what you want. Attribution appreciated.
